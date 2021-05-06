@@ -8,16 +8,16 @@ import java.util.Optional;
 
 
 @Repository
-public interface CarsRepository extends JpaRepository<payroll.Cars,Long> {
+public interface CarsRepository extends JpaRepository<Cars,Long> {
     @Override
-    <S extends payroll.Cars> S save(S entity);
+    <S extends Cars> S save(S entity);
 
     @Override
-    Optional<payroll.Cars> findById(Long aLong);
+    Optional<Cars> findById(Long aLong);
 
     @Override
-    <S extends payroll.Cars> Optional<S> findOne(Example<S> example);
+    <S extends Cars> Optional<S> findOne(Example<S> example);
 
     @Override
-    <S extends payroll.Cars> List<S> findAll(Example<S> example);
+    <S extends Cars> List<S> findAll(Example<S> example);
 }

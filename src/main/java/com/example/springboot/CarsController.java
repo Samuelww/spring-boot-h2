@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import payroll.Cars;
 
 @RestController
 class CarsController {
@@ -23,28 +22,28 @@ class CarsController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/Samochody")
+    @GetMapping("/Cars")
     List<Cars> all() {
         return repository.findAll();
     }
    //  end::get-aggregate-root[]
 
-    @PostMapping("/employees")
-    Cars newEmployee(@RequestBody Cars newEmployee) {
-        return repository.save(newEmployee);
+    @PostMapping("/Cars")
+    Cars newCar(@RequestBody Cars newCar) {
+        return repository.save(newCar);
     }
 
    //  Single item
 
-//   @GetMapping("/employees/{id}")
-//   Cars one(@PathVariable Long id) {
-//
-//        return repository.findById(id)
-//                .orElseThrow(() -> new EmployeeNotFoundException(id));
-//    }
+   @GetMapping("/employees/{id}")
+   Cars one(@PathVariable Long id) {
 
-    @PutMapping("/employees/{id}")
-    Cars replaceEmployee(@RequestBody Cars newCar, @PathVariable Long id) {
+          return repository.findById(id)
+                .orElseThrow(() -> new CarNotFoundException(id));
+    }
+
+    @PutMapping("/Cars/{id}")
+    Cars replaceCar(@RequestBody Cars newCar, @PathVariable Long id) {
 
        return repository.findById(id)
                 .map(car -> {
@@ -58,8 +57,8 @@ class CarsController {
                 });
     }
 
-    @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    @DeleteMapping("/Cars/{id}")
+    void deleteCar(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }
