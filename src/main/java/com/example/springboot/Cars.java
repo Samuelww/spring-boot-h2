@@ -1,4 +1,4 @@
-package payroll;
+package com.example.springboot;
 
 import java.util.Objects;
 
@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
 public class Cars {
 
     private @Id @GeneratedValue Long id;
@@ -66,6 +65,6 @@ public class Cars {
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", name='" + this.brand + '\'' + ", role='" + this.model + '\'' + '}';
+        return "Car{" + "id=" + this.id + ", brand='" + this.brand + '\'' + ", model='" + this.model + '\'' + '}';
     }
 }
