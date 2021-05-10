@@ -16,7 +16,7 @@ public class Cars {
 
     Cars() {}
 
-    Cars(String brand, String model) {
+    public Cars(String brand, String model) {
 
         this.brand = brand;
         this.model = model;
@@ -38,11 +38,11 @@ public class Cars {
         this.id = id;
     }
 
-    public void setBrand(String name) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 
-    public void setModel(String role) {
+    public void setModel(String model) {
         this.model = model;
     }
 
