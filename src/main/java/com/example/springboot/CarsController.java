@@ -45,19 +45,17 @@ class CarsController {
                 .orElseThrow(() -> new CarNotFoundException(id));
     }
 
-    @PutMapping("/Cars/{id}")
-    Cars replaceCar(@RequestBody Cars newCar, @PathVariable Long id) {
+    @PutMapping("/cars/{id}")
+    Cars replaceEmployee(@RequestBody Cars newCar, @PathVariable Long id) throws Exception {
 
-       return repository.findById(id)
+        return repository.findById(id)
                 .map(car -> {
                     car.setBrand(newCar.getBrand());
                     car.setModel(newCar.getModel());
-                    return repository.save(car);
-               })
-                .orElseGet(() -> {
-                    newCar.setId(id);
-                    return repository.save(newCar);
-                });
+                    return repository.save(car)
+                            ;
+                })
+                .orElseThrow(() -> new Exception("Not found"));
     }
 
     @DeleteMapping("/Cars/{id}")
