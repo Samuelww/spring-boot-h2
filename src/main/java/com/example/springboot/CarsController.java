@@ -29,8 +29,11 @@ class CarsController {
    //  end::get-aggregate-root[]
 
     @PostMapping("/Cars")
-    Cars newCar(@RequestBody Cars newCar) {
-        return repository.save(newCar);
+    Cars newCar(@RequestBody Cars newCar){
+            newCar.setBrand(newCar.getBrand());
+            newCar.setModel(newCar.getModel());
+
+                    return repository.save(newCar);
     }
 
    //  Single item
