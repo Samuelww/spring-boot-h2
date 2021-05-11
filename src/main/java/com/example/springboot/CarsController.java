@@ -1,14 +1,7 @@
 package com.example.springboot;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 class CarsController {
@@ -19,14 +12,10 @@ class CarsController {
         this.repository = repository;
     }
 
-
-    // Aggregate root
-    // tag::get-aggregate-root[]
     @GetMapping("/Cars")
     List<Cars> all() {
         return repository.findAll();
     }
-   //  end::get-aggregate-root[]
 
     @PostMapping("/Cars")
     Cars newCar(@RequestBody Cars newCar){
@@ -36,23 +25,13 @@ class CarsController {
                     return repository.save(newCar);
     }
 
-   //  Single item
-
-   @GetMapping("/employees/{id}")
-   Cars one(@PathVariable Long id) {
-
-          return repository.findById(id)
-                .orElseThrow(() -> new CarNotFoundException(id));
-    }
-
-    @PutMapping("/cars/{id}")
-    Cars replaceEmployee(@RequestBody Cars newCar, @PathVariable Long id) throws Exception {
-
+    @RequestMapping(value = "/Cars/{id}", method = RequestMethod.PUT)
+    Cars replaceCar(@RequestBody Cars newCar, @PathVariable Long id) throws Exception {
         return repository.findById(id)
-                .map(car -> {
-                    car.setBrand(newCar.getBrand());
-                    car.setModel(newCar.getModel());
-                    return repository.save(car)
+                .map(Car -> {
+                    Car.setBrand(newCar.getBrand());
+                    Car.setModel(newCar.getModel());
+                    return repository.save(Car)
                             ;
                 })
                 .orElseThrow(() -> new Exception("Not found"));
